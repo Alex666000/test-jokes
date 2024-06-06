@@ -1,19 +1,15 @@
 "use client";
 
 import {useEffect, useState} from "react";
-import {Inter} from "next/font/google";
-import {getJokes, getJokesCategories} from "@/shared/api/get-jokes";
+import {getJokes} from "@/shared/api/get-jokes";
 import {Nullable} from "@/shared/types/nullable";
-import {Flex} from "@/shared/ui/flex";
 import SkeletonLoader from "@/shared/ui/skeleton-loader/skeleton-loader";
 import Link from "next/link";
-
-const inter = Inter({subsets: ["latin"]});
 
 export const Jokes = () => {
   const [jokesData, setJokesData] = useState<Nullable<JokesResponse>>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [keywords, setKeywords] = useState("");
+  const [keywords] = useState("");
 
   const fetchJokes = async () => {
     try {
@@ -30,10 +26,9 @@ export const Jokes = () => {
     fetchJokes();
   }, [keywords]);
 
-  console.log("render");
 
   return (
-    <div className={inter.className}>
+    <>
       {isLoading ? <SkeletonLoader/> : (
         <>
           <div className={"flex flex-col m-[128px_auto_60px] w-[50%]"}>
@@ -62,7 +57,7 @@ export const Jokes = () => {
           </ul>
         </>
       )}
-    </div>
+    </>
   );
 };
 

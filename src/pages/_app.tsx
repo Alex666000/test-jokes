@@ -5,6 +5,13 @@ import {NextPage} from "next";
 import {queryClient} from "@/shared/api/query-client";
 import "@/app/styles/globals.css";
 
+import { Fira_Sans } from 'next/font/google'
+
+const fira = Fira_Sans({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export type NextPageWithLayout<P = {}, IP = P> = {
   getLayout?: (page: ReactElement) => ReactNode
@@ -19,7 +26,9 @@ export default function App({Component, pageProps}: AppPropsWithLayout) {
   return (
     <QueryClientProvider client={queryClient}>
       <HydrationBoundary state={pageProps.dehydratedState}>
-        <Component {...pageProps} />
+        <main className={fira.className}>
+          <Component {...pageProps} />
+        </main>
       </HydrationBoundary>
     </QueryClientProvider>
   );
