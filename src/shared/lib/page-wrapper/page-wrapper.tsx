@@ -16,7 +16,7 @@ export const PageWrapper = ({
   description,
   favicon,
   padding,
-  paddingTop = '',
+  paddingTop,
   style,
   title,
   ...rest

@@ -6,6 +6,7 @@ import {getJokes, getJokesCategories} from "@/shared/api/get-jokes";
 import {Nullable} from "@/shared/types/nullable";
 import {Flex} from "@/shared/ui/flex";
 import SkeletonLoader from "@/shared/ui/skeleton-loader/skeleton-loader";
+import Link from "next/link";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -29,21 +30,37 @@ export const Jokes = () => {
     fetchJokes();
   }, [keywords]);
 
+  console.log("render");
+
   return (
     <div className={inter.className}>
       {isLoading ? <SkeletonLoader/> : (
-        <div className={`bg-Light-100 text-Dark-700 w-full max-w-[690px] min-h-[180px]`}>
-          {jokesData?.result.map(joke => (
-            <div key={joke.id}>
-              <div>{`Total count: ${jokesData?.total}`}</div>
-              <span className="text-center text-balance">{joke.value}</span>
-              <Flex justify="spaceBetween" className="w-[600px]">
-                <span>{joke.id}</span>
-                <span>{joke.created_at}</span>
-              </Flex>
-            </div>
-          ))}
-        </div>
+        <>
+          <div className={"flex flex-col m-[128px_auto_60px] w-[50%]"}>
+            <input type="text" className={`p-[20px_35px] shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)]
+            mb-5 border-none bg-transparent outline-none text-[20px] text-[#656ec2]`}/>
+            <span className={"pl-[40px]"}>{`Total count: ${jokesData?.total}`}</span>
+          </div>
+          <ul className={`w-full max-w-[1560px] min-h-[250px] flex`}>
+            {jokesData?.result.map(joke => (
+              <ul key={joke.id} className={"w-full flex flex-wrap gap-20 justify-center mb-[60px]"}>
+                <Link
+                  className={`w-[calc(50%_ - _10px)] min-h-[260px] p-[40px] shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)]
+                  flex flex-col justify-between
+                  text-[#282626] text-regular-text-16
+                  `}
+                  href={`${process.env.SERVER_URL}/jokes/${joke.id}`}
+                  target={"_blank"}>
+                  <p className={`w-full`}>{joke.value}</p>
+                  <p className={`w-full flex justify-between text-[#767676] `}>
+                    <span>{joke.id}</span>
+                    <span>{joke.created_at}</span>
+                  </p>
+                </Link>
+              </ul>
+            ))}
+          </ul>
+        </>
       )}
     </div>
   );
