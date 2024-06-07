@@ -5,7 +5,7 @@ import {JokesAPI} from "@/entities/api/jokes-api";
 
 export const useSearch = () => {
   const [searchTerm, setSearchTerm] = useState("hell");
-  const debouncedSearch = useDebounce(searchTerm, 1500);
+  const debouncedSearch = useDebounce(searchTerm, 4500);
 
   const {data, isLoading, isSuccess} = useQuery({
     queryKey: ["key", searchTerm],

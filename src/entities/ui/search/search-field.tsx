@@ -1,6 +1,6 @@
 import {ChangeEvent, ComponentPropsWithoutRef, forwardRef} from "react";
 import {Nullable} from "@/shared/types/nullable";
-import {JokesResponse} from "@/entities/model/type/jokes";
+import {JokesResponse} from "../../model/type/jokes";
 
 type Props = {
   searchTerm: string;
@@ -9,7 +9,7 @@ type Props = {
   handleSearch: (event: ChangeEvent<HTMLInputElement>) => void;
 } & ComponentPropsWithoutRef<"input">;
 
-export const SearchJokesField = forwardRef<HTMLInputElement, Props>((props, ref) => {
+export const SearchField = forwardRef<HTMLInputElement, Props>((props, ref) => {
   const {searchTerm, jokesData, className, handleSearch, ...rest} = props
   return (
     <div>
@@ -29,4 +29,4 @@ export const SearchJokesField = forwardRef<HTMLInputElement, Props>((props, ref)
   );
 });
 
-SearchJokesField.displayName = "Search";
+SearchField.displayName = "Search";

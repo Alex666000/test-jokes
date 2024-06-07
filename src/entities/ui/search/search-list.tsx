@@ -8,7 +8,7 @@ type Props = {
   className?: string;
 } & ComponentPropsWithoutRef<"ul">;
 
-export const SearchJokesList = forwardRef<HTMLUListElement, Props>((props, ref) => {
+export const SearchList = forwardRef<HTMLUListElement, Props>((props, ref) => {
   const {jokesData, className, ...rest} = props;
   return (
     <ul ref={ref} {...rest} className={className}>
@@ -28,4 +28,4 @@ export const SearchJokesList = forwardRef<HTMLUListElement, Props>((props, ref) 
   );
 });
 
-SearchJokesList.displayName = "SearchJokesList";
+SearchList.displayName = "SearchList";
