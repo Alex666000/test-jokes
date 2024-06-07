@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {getJokes} from "@/shared/api/get-jokes";
 import {Nullable} from "@/shared/types/nullable";
 import SkeletonLoader from "@/shared/ui/skeleton-loader/skeleton-loader";
@@ -14,7 +14,7 @@ export const Jokes = () => {
   const fetchJokes = async () => {
     try {
       setIsLoading(true);
-      const response = await getJokes("sos");
+      const response = await getJokes("hell");
       setJokesData(response);
       setIsLoading(false);
     } catch (error) {
@@ -26,14 +26,18 @@ export const Jokes = () => {
     fetchJokes();
   }, [keywords]);
 
-
   return (
     <>
       {isLoading ? <SkeletonLoader/> : (
         <>
           <div className={"flex flex-col m-[128px_auto_60px] w-[50%]"}>
-            <input type="text" className={`p-[20px_35px] shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)]
-            mb-5 border-none bg-transparent outline-none text-[20px] text-[#656ec2]`}/>
+            <input
+              autoFocus
+              placeholder={'Search jokes...'}
+              type="text"
+              className={`p-[20px_35px] shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)]
+              mb-5 border-none bg-transparent outline-none text-[20px] text-[#656ec2]`}
+            />
             <span className={"pl-[40px]"}>{`Total count: ${jokesData?.total}`}</span>
           </div>
           <ul className={`w-full max-w-[1560px] min-h-[250px] flex`}>
@@ -44,8 +48,7 @@ export const Jokes = () => {
                   flex flex-col justify-between
                   text-[#282626] text-regular-text-16
                   `}
-                  href={`${process.env.SERVER_URL}/jokes/${joke.id}`}
-                  target={"_blank"}>
+                  href={`${process.env.SERVER_URL}/jokes/${joke.id}`}>
                   <p className={`w-full`}>{joke.value}</p>
                   <p className={`w-full flex justify-between text-[#767676] `}>
                     <span>{joke.id}</span>
@@ -61,13 +64,12 @@ export const Jokes = () => {
   );
 };
 
-
 // types
 export type JokesResponse = {
   total: number;
-  result: Jokes[];
+  result: Joke[];
 }
-export type Jokes = {
+export type Joke = {
   categories: string[];
   created_at: string;
   icon_url: string;
@@ -76,6 +78,3 @@ export type Jokes = {
   url: string;
   value: string;
 }
-
-
-
