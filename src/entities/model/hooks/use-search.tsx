@@ -4,13 +4,17 @@ import {useQuery} from "@tanstack/react-query";
 import {JokesAPI} from "@/entities/api/jokes-api";
 
 export const useSearch = () => {
-  const [searchTerm, setSearchTerm] = useState("hell");
-  const debouncedSearch = useDebounce(searchTerm, 4500);
+  const [searchTerm, setSearchTerm] = useState("");
+  const debouncedSearch = useDebounce(searchTerm, 1500);
 
   const {data, isLoading, isSuccess} = useQuery({
     queryKey: ["key", searchTerm],
     queryFn: () => {
-      return JokesAPI.getJokes(searchTerm)
+      if (searchTerm.length < 4) {
+        return;
+      }
+
+      return JokesAPI.getJokes(searchTerm);
     }
   });
 
@@ -18,5 +22,5 @@ export const useSearch = () => {
     setSearchTerm(e.target.value);
   };
 
-  return {debouncedSearch,searchTerm,handleSearch,data,isLoading, isSuccess}
+  return {debouncedSearch, searchTerm, handleSearch, data, isLoading, isSuccess};
 };

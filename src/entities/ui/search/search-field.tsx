@@ -23,7 +23,11 @@ export const SearchField = forwardRef<HTMLInputElement, Props>((props, ref) => {
         value={searchTerm}
         onChange={handleSearch}
       />
-      <span className={"pl-[40px] block mb-4"}>{`Total count: ${jokesData?.total}`}</span>
+      {jokesData && (
+        <span className={"pl-[40px] block mb-4"}>
+          {`Total count: ${jokesData.total}`}
+        </span>
+      )}
     </div>
 
   );

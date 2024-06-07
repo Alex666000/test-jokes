@@ -4,12 +4,18 @@ import {useEffect, useRef} from "react";
 import {Nullable} from "@/shared/types/nullable";
 import {useSearch} from "../../model/hooks/use-search";
 import {SearchField} from "./search-field";
-import {SearchList} from "./search-list";
+import {SearchJokesList} from "./search-jokes-list";
 
 export const Search = () => {
   const inputRef = useRef<Nullable<HTMLInputElement>>(null);
 
-  const {data: {data: jokesData} = {}, searchTerm, handleSearch, isSuccess} = useSearch();
+  const {
+    data: {data: jokesData} = {},
+    searchTerm,
+    handleSearch,
+    isSuccess,
+    isLoading
+  } = useSearch();
 
   useEffect(() => {
     if (inputRef.current) {
@@ -27,7 +33,7 @@ export const Search = () => {
           jokesData={jokesData}
           handleSearch={handleSearch}/>
       </div>
-      {isSuccess && <SearchList
+      {isSuccess && <SearchJokesList
         className={`flex flex-wrap gap-[20px] justify-center w-[1280px] h-auto mb-[60px] rounded-md`}
         jokesData={jokesData}/>}
     </div>
