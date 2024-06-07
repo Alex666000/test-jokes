@@ -28,7 +28,8 @@ export const Search = () => {
       <div className={"flex flex-col m-[128px_auto_60px] w-[50%]"}>
         <SearchField
           className={`w-full max-w-[710px] p-[20px_35px] shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)]
-          mb-5 border-none bg-transparent outline-none text-[20px] text-[#656ec2]`}
+          mb-5 border-none bg-transparent outline-none text-xl shadow-text-[#656ec2]
+          placeholder:text-[#656ec2]`}
           searchTerm={searchTerm}
           jokesData={jokesData}
           handleSearch={handleSearch}/>
