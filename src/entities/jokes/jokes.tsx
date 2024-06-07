@@ -3,22 +3,19 @@
 import {useEffect, useRef, useState} from "react";
 import {getJokes} from "@/shared/api/get-jokes";
 import {Nullable} from "@/shared/types/nullable";
-import SkeletonLoader from "@/shared/ui/skeleton-loader/skeleton-loader";
 import Link from "next/link";
 
 export const Jokes = () => {
   const [jokesData, setJokesData] = useState<Nullable<JokesResponse>>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [keywords] = useState("");
+  const inputRef = useRef<Nullable<HTMLInputElement>>(null);
 
   const fetchJokes = async () => {
     try {
-      setIsLoading(true);
       const response = await getJokes("hell");
       setJokesData(response);
-      setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -26,41 +23,41 @@ export const Jokes = () => {
     fetchJokes();
   }, [keywords]);
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
   return (
-    <>
-      {isLoading ? <SkeletonLoader/> : (
-        <>
-          <div className={"flex flex-col m-[128px_auto_60px] w-[50%]"}>
-            <input
-              autoFocus
-              placeholder={'Search jokes...'}
-              type="text"
-              className={`p-[20px_35px] shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)]
+    <div className={`flex flex-col`}>
+      <div className={"flex flex-col m-[128px_auto_60px] w-[50%]"}>
+        <input
+          autoFocus
+          ref={inputRef}
+          placeholder={"Search jokes..."}
+          type="text"
+          className={`p-[20px_35px] shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)]
               mb-5 border-none bg-transparent outline-none text-[20px] text-[#656ec2]`}
-            />
-            <span className={"pl-[40px]"}>{`Total count: ${jokesData?.total}`}</span>
-          </div>
-          <ul className={`w-full max-w-[1560px] min-h-[250px] flex`}>
-            {jokesData?.result.map(joke => (
-              <ul key={joke.id} className={"w-full flex flex-wrap gap-20 justify-center mb-[60px]"}>
-                <Link
-                  className={`w-[calc(50%_ - _10px)] min-h-[260px] p-[40px] shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)]
-                  flex flex-col justify-between
+        />
+        <span className={"pl-[40px]"}>{`Total count: ${jokesData?.total}`}</span>
+      </div>
+      <ul className={`flex flex-wrap gap-[20px] justify-center w-[1280px] h-auto mb-[60px] rounded-md`}>
+        {jokesData?.result.map(joke => (
+          <Link key={joke.id}
+                className={`flex flex-col justify-between w-[calc(50%_ - _10px)] h-[260px] p-[40px] text-balance shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)]
                   text-[#282626] text-regular-text-16
                   `}
-                  href={`${process.env.SERVER_URL}/jokes/${joke.id}`}>
-                  <p className={`w-full`}>{joke.value}</p>
-                  <p className={`w-full flex justify-between text-[#767676] `}>
-                    <span>{joke.id}</span>
-                    <span>{joke.created_at}</span>
-                  </p>
-                </Link>
-              </ul>
-            ))}
-          </ul>
-        </>
-      )}
-    </>
+                href={`${process.env.SERVER_URL}/jokes/${joke.id}`}>
+            <p className={`w-full max-w-[547px] min-h-[38px] line-clamp-2`}>{joke.value}</p>
+            <p className={`w-full flex justify-between text-[#767676] `}>
+              <span>{joke.id}</span>
+              <span>{joke.created_at}</span>
+            </p>
+          </Link>
+        ))}
+      </ul>
+    </div>
   );
 };
 

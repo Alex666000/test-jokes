@@ -8,7 +8,8 @@ module.exports = {
     "./src/**/*.{ts,tsx}",
   ],
   darkMode: ["class"],
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp"),
+  ],
   prefix: "",
   theme: {
     screens: {
