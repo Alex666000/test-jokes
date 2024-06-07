@@ -1,8 +1,6 @@
 import { ReactNode } from 'react'
-
 import { queryClient } from '@/shared/api/query-client'
 import { HydrationBoundary, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 
 type Props = {
@@ -13,8 +11,9 @@ type Props = {
 export const AppQueryClientProvider = ({ children, pageProps = {} }: Props) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <HydrationBoundary state={pageProps.dehydratedState}>{children}</HydrationBoundary>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <HydrationBoundary state={pageProps.dehydratedState}>
+        {children}
+      </HydrationBoundary>
     </QueryClientProvider>
   )
 }

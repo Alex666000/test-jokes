@@ -1,5 +1,5 @@
 import {PageWrapper} from "@/shared/lib/page-wrapper/page-wrapper";
-import {Jokes} from "@/entities/jokes/jokes";
+import {Jokes} from "@/entities/ui/jokes/jokes";
 
 // todo-  eslint  - удалить комменты seo
 // todo - импорты по FSD  -warning console - Skeleton переделать - aria -
