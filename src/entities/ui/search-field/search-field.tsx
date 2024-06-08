@@ -1,4 +1,4 @@
-import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useEffect, useRef } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, useEffect, useRef } from 'react'
 
 import { Nullable } from '@/shared/types/nullable'
 
