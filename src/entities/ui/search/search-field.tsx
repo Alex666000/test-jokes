@@ -1,4 +1,4 @@
-import { ChangeEvent, ComponentPropsWithoutRef, forwardRef } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useRef } from 'react'
 
 import { Nullable } from '@/shared/types/nullable'
 
@@ -13,6 +13,7 @@ type Props = {
 
 export const SearchField = forwardRef<HTMLInputElement, Props>((props, ref) => {
   const { className, handleSearch, jokesData, searchTerm, ...rest } = props
+  const inputRef = useRef<HTMLInputElement>(null)
 
   return (
     <div>
@@ -22,15 +23,15 @@ export const SearchField = forwardRef<HTMLInputElement, Props>((props, ref) => {
         className={className}
         onChange={handleSearch}
         placeholder={'Search jokes...'}
-        ref={ref}
+        ref={inputRef}
         type={'text'}
         value={searchTerm}
       />
-      {jokesData && (
+      {jokesData && inputRef.current?.value !== '' && searchTerm !== '' && (
         <span className={'mb-4 block pl-[40px]'}>{`Total count: ${jokesData.total}`}</span>
       )}
     </div>
   )
 })
 
-SearchField.displayName = 'Search'
+SearchField.displayName = 'SearchField'

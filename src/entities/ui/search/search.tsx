@@ -41,7 +41,7 @@ export const Search = () => {
 
   return (
     <>
-      {isLoading ? (
+      {isFetching || isLoading ? (
         <SearchJokesListSkeleton />
       ) : (
         <Flex direction={'column'}>
@@ -52,6 +52,7 @@ export const Search = () => {
           placeholder:text-[#656ec2]`}
               handleSearch={handleSearch}
               jokesData={jokesData}
+              ref={inputRef}
               searchTerm={searchTerm}
             />
           </div>

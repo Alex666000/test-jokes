@@ -20,8 +20,8 @@ export const SearchJokesList = forwardRef<HTMLUListElement, Props>((props, ref) 
           index < 2
             ? 'w-[800px)] flex h-[260px] flex-col justify-between text-balance p-[40px] text-regular-text-16' +
               'text-[#282626] shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)]'
-            : 'w-[406px] h-[150px] flex flex-col justify-between text-balance p-[10px] text-regular-text-16 text-[#282626]' +
-              'text-[#282626]  shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)]'
+            : 'w-full grow w-[420px] h-[120px] px-4 flex flex-col justify-between text-balance p-[10px] text-regular-text-16 text-[#282626]' +
+              'text-[#282626] shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)]'
 
         return (
           <Link className={linkClass} href={`${process.env.SERVER_URL}/jokes/${id}`} key={id}>
