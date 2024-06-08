@@ -9,8 +9,9 @@ import {
   forwardRef,
 } from 'react'
 
-import { ReturnComponent } from '@/shared/types/return-component'
 import { clsx } from 'clsx'
+
+import { ReturnComponent } from '../../types/return-component'
 
 // types
 type FlexJustifyContent =

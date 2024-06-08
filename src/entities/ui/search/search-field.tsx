@@ -8,11 +8,21 @@ type Props = {
   className?: string
   handleSearch: (event: ChangeEvent<HTMLInputElement>) => void
   jokesData: Nullable<JokesResponse> | undefined
+  placeholder?: string
   searchTerm: string
+  type?: string
 } & ComponentPropsWithoutRef<'input'>
 
 export const SearchField = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { className, handleSearch, jokesData, searchTerm, ...rest } = props
+  const {
+    className,
+    handleSearch,
+    jokesData,
+    placeholder = 'Search jokes...',
+    searchTerm,
+    type = 'text',
+    ...rest
+  } = props
   const inputRef = useRef<HTMLInputElement>(null)
 
   return (
@@ -20,11 +30,13 @@ export const SearchField = forwardRef<HTMLInputElement, Props>((props, ref) => {
       <input
         {...rest}
         autoFocus
-        className={className}
+        className={`shadow-text-[#656ec2] mb-5 w-full max-w-[632px]
+          border-none bg-transparent p-[20px_35px] text-xl shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)] outline-none
+          placeholder:text-[#656ec2]`}
         onChange={handleSearch}
-        placeholder={'Search jokes...'}
+        placeholder={placeholder}
         ref={inputRef}
-        type={'text'}
+        type={type}
         value={searchTerm}
       />
       {jokesData && inputRef.current?.value !== '' && searchTerm !== '' && (

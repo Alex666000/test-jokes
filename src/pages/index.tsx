@@ -1,9 +1,7 @@
 import { Search } from '@/entities/ui/search/search'
-import { PageWrapper } from '@/shared/lib/page-wrapper/page-wrapper'
+import { PageWrapper } from '@/shared/lib/layouts/page-wrapper/page-wrapper'
 
-// удалить комменты
-// todo - импорты по FSD  -warning console - Skeleton переделать - aria -
-// если карточек больше 2 то отдельный им размер + размер карточек и на 4 символ запрос
+// todo  -warning console -
 // redux для тотал каунт
 
 const HomePage = () => {

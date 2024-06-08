@@ -2,14 +2,14 @@ import { CSSProperties, ReactNode } from 'react'
 
 import { clsx } from 'clsx'
 
-interface SkeletonProps {
+type Props = {
   children?: ReactNode
   className?: string
   height?: number | string
   width?: number | string
 }
 
-export const Skeleton = (props: SkeletonProps) => {
+export const Skeleton = (props: Props) => {
   const { className, height, width, ...rest } = props
 
   const styles: CSSProperties = {

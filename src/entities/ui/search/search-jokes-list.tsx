@@ -14,7 +14,11 @@ export const SearchJokesList = forwardRef<HTMLUListElement, Props>((props, ref) 
   const { className, jokesData, ...rest } = props
 
   return (
-    <ul ref={ref} {...rest} className={className}>
+    <ul
+      ref={ref}
+      {...rest}
+      className={`mb-[60px] flex h-auto w-[1280px] flex-wrap justify-center gap-[20px] rounded-md`}
+    >
       {jokesData?.result?.map(({ created_at, id, value }, index) => {
         const linkClass =
           index < 2

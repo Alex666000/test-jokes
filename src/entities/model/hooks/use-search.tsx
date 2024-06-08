@@ -1,8 +1,9 @@
 import { ChangeEvent, useState } from 'react'
 
-import { JokesAPI } from '@/entities/api/jokes-api'
 import { useDebounce } from '@/shared/lib/hooks/useDebounce'
 import { useQuery } from '@tanstack/react-query'
+
+import { JokesAPI } from '../../api/jokes-api'
 
 export const useSearch = () => {
   const [searchTerm, setSearchTerm] = useState('')
