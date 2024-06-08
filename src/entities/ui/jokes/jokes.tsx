@@ -1,8 +1,8 @@
 'use client'
 
-import { useJokesData } from '@/entities/model/hooks/use-jokes-data'
 import { SearchJokesListSkeleton } from '@/shared/ui/skeleton'
 
+import { useJokesData } from '../../model/hooks/use-jokes-data'
 import { Search } from '../search/search'
 
 export const Jokes = () => {

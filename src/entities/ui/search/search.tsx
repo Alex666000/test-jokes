@@ -1,10 +1,11 @@
 import { ChangeEvent, forwardRef } from 'react'
 
-import { JokesResponse } from '@/entities/model/type/jokes'
-import { SearchField } from '@/entities/ui/search-field/search-field'
-import { SearchJokesList } from '@/entities/ui/search-jokes-list/search-jokes-list'
 import { Nullable } from '@/shared/types/nullable'
 import { Flex } from '@/shared/ui/flex'
+
+import { JokesResponse } from '../../model/type/jokes'
+import { SearchField } from '../search-field/search-field'
+import { SearchJokesList } from '../search-jokes-list/search-jokes-list'
 
 type Props = {
   data: Nullable<JokesResponse> | undefined
