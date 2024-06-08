@@ -16,7 +16,6 @@
     color: inherit;
   }
 
-  /* Delete autofill in input: */
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus input:-webkit-autofill,
@@ -34,7 +33,6 @@
     -webkit-text-fill-color: #fff;
   }
 
-  /* Reset ,browser Input styles */
   input[type='search']::-webkit-search-cancel-button {
     display: none;
   }
