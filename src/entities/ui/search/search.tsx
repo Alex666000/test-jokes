@@ -16,14 +16,9 @@ type Props = {
 export const Search = forwardRef<HTMLInputElement, Props>(
   ({ data, handleSearch, isSuccess, searchTerm }, ref) => {
     return (
-      <Flex direction={'column'}>
+      <Flex direction={'column'} ref={ref}>
         <div className={'m-[128px_auto_60px] flex w-[50%] flex-col'}>
-          <SearchField
-            handleSearch={handleSearch}
-            jokesData={data}
-            ref={ref}
-            searchTerm={searchTerm}
-          />
+          <SearchField handleSearch={handleSearch} jokesData={data} searchTerm={searchTerm} />
         </div>
         {isSuccess && <SearchJokesList jokesData={data} />}
       </Flex>
