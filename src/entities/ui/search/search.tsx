@@ -33,7 +33,7 @@ export const Search = () => {
     } else {
       const timer = setTimeout(() => {
         setIsLoading(false)
-      }, 1500)
+      }, 1000)
 
       return () => clearTimeout(timer)
     }
@@ -47,7 +47,7 @@ export const Search = () => {
         <Flex direction={'column'}>
           <div className={'m-[128px_auto_60px] flex w-[50%] flex-col'}>
             <SearchField
-              className={`shadow-text-[#656ec2] mb-5 w-full max-w-[710px]
+              className={`shadow-text-[#656ec2] mb-5 w-full max-w-[632px]
           border-none bg-transparent p-[20px_35px] text-xl shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)] outline-none
           placeholder:text-[#656ec2]`}
               handleSearch={handleSearch}

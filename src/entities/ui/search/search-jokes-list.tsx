@@ -15,20 +15,24 @@ export const SearchJokesList = forwardRef<HTMLUListElement, Props>((props, ref) 
 
   return (
     <ul ref={ref} {...rest} className={className}>
-      {jokesData?.result?.map(({ created_at, id, value }) => (
-        <Link
-          className={`w-[calc(50%_ - _10px)] flex h-[260px] flex-col justify-between text-balance p-[40px] text-regular-text-16
-                  text-[#282626] shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)]`}
-          href={`${process.env.SERVER_URL}/jokes/${id}`}
-          key={id}
-        >
-          <p className={`line-clamp-2 min-h-[38px] w-full max-w-[547px]`}>{value}</p>
-          <p className={`flex w-full justify-between text-[#767676] `}>
-            <span>{id}</span>
-            <span>{created_at}</span>
-          </p>
-        </Link>
-      ))}
+      {jokesData?.result?.map(({ created_at, id, value }, index) => {
+        const linkClass =
+          index < 2
+            ? 'w-[800px)] flex h-[260px] flex-col justify-between text-balance p-[40px] text-regular-text-16' +
+              'text-[#282626] shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)]'
+            : 'w-[406px] h-[150px] flex flex-col justify-between text-balance p-[10px] text-regular-text-16 text-[#282626]' +
+              'text-[#282626]  shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)]'
+
+        return (
+          <Link className={linkClass} href={`${process.env.SERVER_URL}/jokes/${id}`} key={id}>
+            <p className={`line-clamp-2 min-h-[38px] w-full max-w-[547px]`}>{value}</p>
+            <p className={`flex w-full justify-between text-[#767676] `}>
+              <span>{id}</span>
+              <span>{created_at}</span>
+            </p>
+          </Link>
+        )
+      })}
     </ul>
   )
 })
