@@ -8,14 +8,11 @@ export const useSearch = () => {
   const debouncedSearch = useDebounce(searchTerm, 1500);
 
   const {data, isLoading, isSuccess} = useQuery({
-    queryKey: ["key", searchTerm],
+    queryKey: ["key", debouncedSearch],
     queryFn: () => {
-      if (searchTerm.length < 4) {
-        return;
-      }
-
-      return JokesAPI.getJokes(searchTerm);
-    }
+      return JokesAPI.getJokes(debouncedSearch);
+    },
+    enabled: debouncedSearch.length >= 4,
   });
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {

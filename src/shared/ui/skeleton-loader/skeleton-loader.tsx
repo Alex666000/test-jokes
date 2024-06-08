@@ -7,7 +7,7 @@ const SkeletonLoader = ({className, ...rest}: SkeletonProps) => {
     <Skeleton
       {...rest}
       baseColor="#ecf1f3"
-      highlightColor="#f0f3d6"
+      highlightColor="eceef0"
       className={clsx("rounded-lg", className)}
     />
   );
