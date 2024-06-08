@@ -1,4 +1,4 @@
-import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useRef } from 'react'
+import { ChangeEvent, ComponentPropsWithoutRef, forwardRef, useEffect, useRef } from 'react'
 
 import { Nullable } from '@/shared/types/nullable'
 
@@ -13,7 +13,7 @@ type Props = {
   type?: string
 } & ComponentPropsWithoutRef<'input'>
 
-export const SearchField = forwardRef<HTMLInputElement, Props>((props, ref) => {
+export const SearchField = (props: Props) => {
   const {
     className,
     handleSearch,
@@ -23,7 +23,14 @@ export const SearchField = forwardRef<HTMLInputElement, Props>((props, ref) => {
     type = 'text',
     ...rest
   } = props
+
   const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [])
 
   return (
     <div>
@@ -44,6 +51,4 @@ export const SearchField = forwardRef<HTMLInputElement, Props>((props, ref) => {
       )}
     </div>
   )
-})
-
-SearchField.displayName = 'SearchField'
+}

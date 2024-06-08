@@ -1,13 +1,12 @@
-import { Search } from '@/entities/ui/search/search'
-import { PageWrapper } from '@/shared/lib/layouts/page-wrapper/page-wrapper'
+import { Jokes } from '@/entities/ui'
+import { PageWrapper } from '@/shared/lib/layouts'
 
-// todo  -warning console -
 // redux для тотал каунт
 
 const HomePage = () => {
   return (
     <PageWrapper>
-      <Search />
+      <Jokes />
     </PageWrapper>
   )
 }

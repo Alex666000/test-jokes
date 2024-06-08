@@ -21,5 +21,13 @@ export const useSearch = () => {
     setSearchTerm(e.target.value)
   }
 
-  return { data, debouncedSearch, handleSearch, isFetching, isLoading, isSuccess, searchTerm }
+  return {
+    data,
+    debouncedSearch,
+    handleSearch,
+    isFetching,
+    isLoading,
+    isSuccess,
+    searchTerm,
+  }
 }
