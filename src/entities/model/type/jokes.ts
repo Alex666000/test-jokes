@@ -1,17 +1,15 @@
-
 export type JokesResponse = {
-  total: number;
-  result: Joke[];
-};
+  result: Joke[]
+  total: number
+}
 
 type Joke = {
-  created_at: string;
-  id: string;
-  value: string;
+  created_at: string
+  id: string
+  value: string
 } & Partial<{
-  categories: string[];
-  icon_url: string;
-  updated_at: string;
-  url: string;
-}>;
-
+  categories: string[]
+  icon_url: string
+  updated_at: string
+  url: string
+}>

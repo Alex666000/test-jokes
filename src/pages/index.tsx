@@ -1,7 +1,7 @@
-import {PageWrapper} from "@/shared/lib/page-wrapper/page-wrapper";
-import {Search} from "@/entities/ui/search/search";
+import { Search } from '@/entities/ui/search/search'
+import { PageWrapper } from '@/shared/lib/page-wrapper/page-wrapper'
 
-// todo-  eslint  - удалить комменты
+// удалить комменты
 // todo - импорты по FSD  -warning console - Skeleton переделать - aria -
 // если карточек больше 2 то отдельный им размер + размер карточек и на 4 символ запрос
 // redux для тотал каунт
@@ -9,10 +9,9 @@ import {Search} from "@/entities/ui/search/search";
 const HomePage = () => {
   return (
     <PageWrapper>
-      <Search/>
-    </PageWrapper>);
-};
+      <Search />
+    </PageWrapper>
+  )
+}
 
-export default HomePage;
-
-
+export default HomePage

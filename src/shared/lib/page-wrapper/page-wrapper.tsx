@@ -1,35 +1,37 @@
-import {ComponentPropsWithoutRef, CSSProperties} from "react";
-import {ReturnComponent} from "@/shared/types/return-component";
-import {HeadMeta} from "@/shared/lib/seo";
+import { CSSProperties, ComponentPropsWithoutRef } from 'react'
+
+import { HeadMeta } from '@/shared/lib/seo'
+import { ReturnComponent } from '@/shared/types/return-component'
 
 type Props = {
   description?: string
   favicon?: string
-  paddingTop?: CSSProperties["paddingTop"]
-  padding?: CSSProperties["padding"]
+  padding?: CSSProperties['padding']
+  paddingTop?: CSSProperties['paddingTop']
   title?: string
-} & ComponentPropsWithoutRef<"section">
+} & ComponentPropsWithoutRef<'section'>
 
 export const PageWrapper = ({
-                              children,
-                              className,
-                              description,
-                              favicon,
-                              padding,
-                              paddingTop,
-                              style,
-                              title,
-                              ...rest
-                            }: Props): ReturnComponent => {
-
-  const styles: CSSProperties = {padding: padding, paddingTop: paddingTop, ...style};
+  children,
+  className,
+  description,
+  favicon,
+  padding,
+  paddingTop,
+  style,
+  title,
+  ...rest
+}: Props): ReturnComponent => {
+  const styles: CSSProperties = { padding: padding, paddingTop: paddingTop, ...style }
 
   return (
-
-    <section className={`w-full max-w-[1600px] mx-auto p-5 justify-center block border-box`}
-             style={styles} {...rest}>
-      <HeadMeta description={description} title={title}/>
+    <section
+      className={`border-box mx-auto block w-full max-w-[1600px] justify-center p-5`}
+      style={styles}
+      {...rest}
+    >
+      <HeadMeta description={description} title={title} />
       {children}
     </section>
-  );
-};
+  )
+}

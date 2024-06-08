@@ -68,11 +68,11 @@
   }
 
   html {
-    @apply w-full h-screen;
+    @apply h-screen w-full;
   }
 
   body {
-    @apply p-0 m-0 min-h-full w-full overflow-x-hidden bg-Light-100
+    @apply m-0 min-h-full w-full overflow-x-hidden bg-Light-100 p-0
     font-inter text-regular-text-16 font-main-400 not-italic text-Dark-900;
   }
 

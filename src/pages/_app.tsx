@@ -1,16 +1,18 @@
-import type {AppProps} from "next/app";
-import {ReactElement, ReactNode} from "react";
-import {NextPage} from "next";
-import "@/app/styles/globals.css";
+import type { AppProps } from 'next/app'
 
-import {Fira_Sans} from "next/font/google";
-import {AppQueryClientProvider} from "@/app/providers/app-query-client-provider";
+import { ReactElement, ReactNode } from 'react'
+
+import { AppQueryClientProvider } from '@/app/providers/app-query-client-provider'
+import { NextPage } from 'next'
+import { Fira_Sans } from 'next/font/google'
+
+import '@/app/styles/globals.css'
 
 const fira = Fira_Sans({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-});
+  display: 'swap',
+  subsets: ['latin'],
+  weight: '400',
+})
 
 export type NextPageWithLayout<P = {}, IP = P> = {
   getLayout?: (page: ReactElement) => ReactNode
@@ -20,13 +22,12 @@ type AppPropsWithLayout = {
   Component: NextPageWithLayout
 } & AppProps
 
-export default function App({Component, pageProps}: AppPropsWithLayout) {
-
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <AppQueryClientProvider {...pageProps}>
       <main className={fira.className}>
         <Component {...pageProps} />
       </main>
     </AppQueryClientProvider>
-  );
+  )
 }

@@ -10,6 +10,7 @@
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
+    "allowImportingTsExtensions": false,
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
@@ -17,10 +18,9 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
+    "types": ["node"],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     },
     "plugins": [
       {

@@ -1,23 +1,24 @@
-import {ChangeEvent, useState} from "react";
-import {useDebounce} from "@/shared/lib/hooks/useDebounce";
-import {useQuery} from "@tanstack/react-query";
-import {JokesAPI} from "@/entities/api/jokes-api";
+import { ChangeEvent, useState } from 'react'
+
+import { JokesAPI } from '@/entities/api/jokes-api'
+import { useDebounce } from '@/shared/lib/hooks/useDebounce'
+import { useQuery } from '@tanstack/react-query'
 
 export const useSearch = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const debouncedSearch = useDebounce(searchTerm, 1500);
+  const [searchTerm, setSearchTerm] = useState('')
+  const debouncedSearch = useDebounce(searchTerm, 1500)
 
-  const {data, isLoading, isSuccess} = useQuery({
-    queryKey: ["key", debouncedSearch],
-    queryFn: () => {
-      return JokesAPI.getJokes(debouncedSearch);
-    },
+  const { data, isFetching, isLoading, isSuccess } = useQuery({
     enabled: debouncedSearch.length >= 4,
-  });
+    queryFn: () => {
+      return JokesAPI.getJokes(debouncedSearch)
+    },
+    queryKey: ['key', debouncedSearch],
+  })
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-  };
+    setSearchTerm(e.target.value)
+  }
 
-  return {debouncedSearch, searchTerm, handleSearch, data, isLoading, isSuccess};
-};
+  return { data, debouncedSearch, handleSearch, isFetching, isLoading, isSuccess, searchTerm }
+}

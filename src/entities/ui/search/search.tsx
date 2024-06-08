@@ -1,48 +1,68 @@
-"use client";
+'use client'
+import { useEffect, useRef, useState } from 'react'
 
-import {useEffect, useRef} from "react";
-import {Nullable} from "@/shared/types/nullable";
-import {useSearch} from "../../model/hooks/use-search";
-import {SearchField} from "./search-field";
-import {SearchJokesList} from "./search-jokes-list";
+import { SearchField } from '@/entities/ui/search/search-field'
+import { SearchJokesList } from '@/entities/ui/search/search-jokes-list'
+import { Nullable } from '@/shared/types/nullable'
+import { SearchJokesListSkeleton } from '@/shared/ui/Skeleton/search-list-skeleton'
+import { Flex } from '@/shared/ui/flex'
+
+import { useSearch } from '../../model/hooks/use-search'
 
 export const Search = () => {
-  const inputRef = useRef<Nullable<HTMLInputElement>>(null);
+  const inputRef = useRef<Nullable<HTMLInputElement>>(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   const {
-    data: {data: jokesData} = {},
-    searchTerm,
+    data: { data: jokesData } = {},
     handleSearch,
+    isFetching,
     isSuccess,
-    isLoading
-  } = useSearch();
+    searchTerm,
+  } = useSearch()
 
   useEffect(() => {
     if (inputRef.current) {
-      inputRef.current.focus();
+      inputRef.current.focus()
     }
-  }, []);
+  }, [])
+
+  useEffect(() => {
+    if (isFetching) {
+      setIsLoading(true)
+    } else {
+      const timer = setTimeout(() => {
+        setIsLoading(false)
+      }, 1500)
+
+      return () => clearTimeout(timer)
+    }
+  }, [isFetching])
 
   return (
     <>
-      {isLoading
-        ? (<div>Skeleton</div>)
-        : (<div className={`flex flex-col`}>
-          <div className={"flex flex-col m-[128px_auto_60px] w-[50%]"}>
+      {isLoading ? (
+        <SearchJokesListSkeleton />
+      ) : (
+        <Flex direction={'column'}>
+          <div className={'m-[128px_auto_60px] flex w-[50%] flex-col'}>
             <SearchField
-              className={`w-full max-w-[710px] p-[20px_35px] shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)]
-          mb-5 border-none bg-transparent outline-none text-xl shadow-text-[#656ec2]
+              className={`shadow-text-[#656ec2] mb-5 w-full max-w-[710px]
+          border-none bg-transparent p-[20px_35px] text-xl shadow-[0_7px_12px_1px_rgba(99,99,110,0.2)] outline-none
           placeholder:text-[#656ec2]`}
-              searchTerm={searchTerm}
+              handleSearch={handleSearch}
               jokesData={jokesData}
-              handleSearch={handleSearch}/>
+              searchTerm={searchTerm}
+            />
           </div>
-          {isSuccess && <SearchJokesList
-            className={`flex flex-wrap gap-[20px] justify-center w-[1280px] h-auto mb-[60px] rounded-md`}
-            jokesData={jokesData}/>}
-        </div>)}
+          {isSuccess && (
+            <SearchJokesList
+              className={`mb-[60px] flex h-auto w-[1280px] flex-wrap justify-center gap-[20px] rounded-md`}
+              jokesData={jokesData}
+            />
+          )}
+        </Flex>
+      )}
     </>
-
-  );
-};
-
+  )
+}
